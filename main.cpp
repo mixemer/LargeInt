@@ -17,6 +17,8 @@ LargeInt storeStringTest();
 LargeInt storeIntTest();
 // test LargeInt with negative values function prototypes
 LargeInt negativeValueTest();
+// test LargeInt with addition of two negative values function prototypes
+LargeInt additionOfTwoNegativeValueTest();
 
 int main(int argc, const char * argv[]) {
     
@@ -24,8 +26,21 @@ int main(int argc, const char * argv[]) {
     cout << storeIntTest() << endl;
 
     cout << negativeValueTest() << endl;
+
+    cout << additionOfTwoNegativeValueTest() << endl;
     
     return 0;
+}
+
+LargeInt additionOfTwoNegativeValueTest()
+{
+    LargeInt l(-1000);
+    LargeInt l2(-1000);
+
+    LargeInt l3;
+    l3 = l + l2;
+
+    return l3;
 }
 
 LargeInt negativeValueTest()
