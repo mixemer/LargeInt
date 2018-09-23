@@ -13,6 +13,11 @@ LargeInt:: LargeInt(const std::string& num)
     fillTheList(num);
 }
 
+LargeInt:: LargeInt(int num)
+{
+    fillTheList(num);
+}
+
 LargeInt:: LargeInt(const UDList<int> &l)
 {
     list = l;
@@ -35,6 +40,16 @@ void LargeInt:: operator= (const std::string& num)
     }
     fillTheList(num);
 }
+
+void LargeInt:: operator= (int num)
+{
+    UDList<int>::iterator head = list.begin();
+    if (head){
+        list.makeEmpty();
+    }
+    fillTheList(num);
+}
+
 // could override what is inside
 void LargeInt:: fillTheList(const std::string& num)
 {
@@ -47,6 +62,16 @@ void LargeInt:: fillTheList(const std::string& num)
             }
             list.insertBack(num[i] - '0');
         }
+    }
+}
+
+void LargeInt:: fillTheList(int num)
+{
+    if (num == 0)
+        list.insertFront(num % 10);
+    while (num) {
+        list.insertFront(num % 10);
+        num = num / 10;
     }
 }
 

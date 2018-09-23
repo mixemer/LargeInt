@@ -22,17 +22,30 @@ private:
     /**
      * fills the list with given string num by parting num into individual digits.
      * will be used for constructor and assignment oporator
-     * @param num is an int
+     * @param num is an string
      */
     void fillTheList(const std::string& num);
+
+    /**
+     * fills the list with given int num by parting num into individual digits.
+     * will be used for constructor and assignment oporator
+     * @param num is an int
+     */
+    void fillTheList(int num);
 public:
     LargeInt() {};
     
     /**
      * Overloaded constructor so it can get an string num so it can fill the nodes of the list with digits of the num
-     * @param num is an int
+     * @param num is an string
      */
     LargeInt(const std::string& num);
+
+    /**
+     * Overloaded constructor so it can get an int num so it can fill the nodes of the list with digits of the num
+     * @param num is an int
+     */
+    LargeInt(int num);
     
     /**
      * copy constructor to copy other object's data into this object.
@@ -48,9 +61,15 @@ public:
     
     /**
      * Overloaded assignment operator fills the nodes of the list with digits of the num
-     * @param num is an int
+     * @param num is an string
      */
     void operator= (const std::string& num);
+
+    /**
+     * Overloaded assignment operator fills the nodes of the list with digits of the num
+     * @param num is an int
+     */
+    void operator= (int num);
     
     /**
      * Adds all the number digits of the both this and otehr LargeInt objects.
