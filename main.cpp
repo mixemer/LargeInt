@@ -8,8 +8,7 @@
 
 
 #include <iostream>
-#include "LargeInt.hpp"
-
+#include "LargeInt.cpp" // cannot incldue hpp because of linking issue
 using namespace std;
 
 int main(int argc, const char * argv[]) {
