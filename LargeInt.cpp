@@ -7,6 +7,7 @@
 //
 
 #include "LargeInt.hpp"
+#include <string>
 
 LargeInt:: LargeInt(const std::string& num)
 {
@@ -53,14 +54,20 @@ void LargeInt:: operator= (int num)
 // could override what is inside
 void LargeInt:: fillTheList(const std::string& num)
 {
+    int i = 0;
+    if (num[0] == '-'){
+        negative = true;
+        i = 1;
+    }
     long size = num.size();
     if (size > 0){
-        for (int i = 0; i < size; i++){
+        while (i < size) {
             if (!isdigit(num[i])){
                 std::cout << string("Bad data type");
                 return;
             }
             list.insertBack(num[i] - '0');
+            i++;
         }
     }
 }
@@ -68,7 +75,11 @@ void LargeInt:: fillTheList(const std::string& num)
 void LargeInt:: fillTheList(int num)
 {
     if (num == 0)
-        list.insertFront(num % 10);
+        list.insertFront(num);
+    else if (num < 0){
+        negative = true;
+        num = num * -1;
+    }
     while (num) {
         list.insertFront(num % 10);
         num = num / 10;
@@ -132,7 +143,9 @@ bool LargeInt:: operator== (const LargeInt& other)
 std::ostream& operator<< (std::ostream& out, const LargeInt& largeInt)
 {
     UDList<int>::iterator it = largeInt.list.begin();
-    
+    if (largeInt.negative) {
+        out << '-';
+    }
     while (it) {
         out << it->info;
         it = it->next;
@@ -154,6 +167,9 @@ std::istream& operator>> (std::istream& in,LargeInt& largeInt)
 
 void LargeInt:: print() const
 {
+    if (this->negative) {
+        std::cout << '-';
+    }
     list.printFromFront();
 }
 

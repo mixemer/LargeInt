@@ -18,6 +18,8 @@ using namespace std;
 class LargeInt{
 private:
     UDList<int> list; // an empty doubly linked list
+
+    bool negative;
     
     /**
      * fills the list with given string num by parting num into individual digits.
