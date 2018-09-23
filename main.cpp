@@ -11,17 +11,32 @@
 #include "LargeInt.cpp" // cannot incldue hpp because of linking issue
 using namespace std;
 
+// test LargeInt with string values function prototypes 
+LargeInt storeStringTest();
+
+// test LargeInt with int values function prototypes
+LargeInt storeIntTest();
+
 int main(int argc, const char * argv[]) {
     
-    LargeInt l("200");
-    LargeInt l2("300");
-    
-    LargeInt l3;
-    
-    l3 = l + l2;
-    l3 = "0";
-    
-    cout << l3 << endl;
+    cout << storeStringTest() << endl;
+    cout << storeIntTest() << endl;
     
     return 0;
+}
+
+LargeInt storeStringTest()
+{
+    LargeInt l(0);
+    l = 100;
+
+    return l;
+}
+
+LargeInt storeIntTest()
+{
+    LargeInt l2("100");
+    l2 = "200";
+
+    return l2;
 }
