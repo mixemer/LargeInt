@@ -13,23 +13,24 @@ using namespace std;
 
 // test LargeInt with string values function prototypes 
 LargeInt storeStringTest();
-
 // test LargeInt with int values function prototypes
 LargeInt storeIntTest();
+// test LargeInt with negative values function prototypes
+LargeInt negativeValueTest();
 
 int main(int argc, const char * argv[]) {
     
     cout << storeStringTest() << endl;
     cout << storeIntTest() << endl;
+
+    cout << negativeValueTest() << endl;
     
     return 0;
 }
 
-LargeInt storeStringTest()
+LargeInt negativeValueTest()
 {
-    LargeInt l(0);
-    l = 100;
-
+    LargeInt l(-1000);
     return l;
 }
 
@@ -39,4 +40,12 @@ LargeInt storeIntTest()
     l2 = "200";
 
     return l2;
+}
+
+LargeInt storeStringTest()
+{
+    LargeInt l(0);
+    l = 100;
+
+    return l;
 }
