@@ -34,6 +34,13 @@ private:
      * @param num is an int
      */
     void fillTheList(int num);
+
+    /**
+     * Adds all the number digits of the both this and otehr LargeInt objects.
+     * @param other is a reference to LargeInt object
+     * @return UDList<x> object that was added by this and other LargeInt
+     */
+    UDList<int> add(const LargeInt& other);
 public:
     LargeInt() {};
     
@@ -60,6 +67,12 @@ public:
      * @param other is a reference to LargeInt object
      */
     void operator= (const LargeInt& other);
+
+    /**
+     * Overloaded assignment operator to copy other object's list into this object.
+     * @param other is a reference to UDList<x> object
+     */
+    void operator= (const UDList<int>& otherlist);
     
     /**
      * Overloaded assignment operator fills the nodes of the list with digits of the num

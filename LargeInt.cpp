@@ -31,7 +31,14 @@ void LargeInt:: operator= (const LargeInt& other)
         list.makeEmpty();
     }
     list = other.list;
+    this->negative = other.negative;
 }
+
+void LargeInt:: operator= (const UDList<int>& otherlist)
+{
+    list = otherlist;
+}
+
 // could override what is inside
 void LargeInt:: operator= (const std::string& num)
 {
@@ -58,6 +65,8 @@ void LargeInt:: fillTheList(const std::string& num)
     if (num[0] == '-'){
         negative = true;
         i = 1;
+    }else {
+        negative = false;
     }
     long size = num.size();
     if (size > 0){
@@ -79,6 +88,8 @@ void LargeInt:: fillTheList(int num)
     else if (num < 0){
         negative = true;
         num = num * -1;
+    }else{
+        negative = false;
     }
     while (num) {
         list.insertFront(num % 10);
@@ -86,13 +97,13 @@ void LargeInt:: fillTheList(int num)
     }
 }
 
-LargeInt LargeInt:: operator+ (const LargeInt& other)
+UDList<int> LargeInt:: add(const LargeInt& other)
 {
     UDList<int> temp;
     bool carry = false;
     UDList<int>::iterator ithis = list.end();
     UDList<int>::iterator iother = other.list.end();
-    
+
     while (ithis || iother)
     {
         int total = 0;
@@ -117,9 +128,23 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
             temp.insertFront(total);
         }
     }
-    
     if (carry) temp.insertFront(1);
-    return LargeInt(temp);
+    return temp;
+}
+
+LargeInt LargeInt:: operator+ (const LargeInt& other)
+{
+    LargeInt temp;
+    if ( (this->negative && other.negative) ) {
+        temp = add(other);
+        temp.negative = true;
+    } else if ( (!this->negative && !other.negative) ){
+        temp = add(other);
+        temp.negative = false;
+    } else {
+        // call operator-
+    }
+    return temp;
 }
 
 bool LargeInt:: operator== (const LargeInt& other)
