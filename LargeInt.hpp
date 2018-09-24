@@ -98,6 +98,18 @@ public:
      * @param other is a reference to LargeInt object
      */
     bool operator== (const LargeInt& other);
+
+    /**
+     * Overloaded bool operator to check if this object is smaller than other object
+     * @param other is a reference to LargeInt object
+     */
+    bool operator< (const LargeInt& other);
+
+    /**
+     * Overloaded bool operator to check if this object is bigger than other object
+     * @param other is a reference to LargeInt object
+     */
+    bool operator> (const LargeInt& other);
     
     /**
      * Overloaded output operator to output data of this object to files

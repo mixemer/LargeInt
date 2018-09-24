@@ -165,6 +165,109 @@ bool LargeInt:: operator== (const LargeInt& other)
     return true;
 }
 
+bool LargeInt:: operator< (const LargeInt& other)
+{
+    UDList<int>::iterator ithis = list.begin();
+    UDList<int>::iterator iother = other.list.begin();
+    bool smaller = (this->list.getLength() < other.list.getLength());
+    bool sameLength = (this->list.getLength() == other.list.getLength());
+    bool same = false;
+
+    if (this->negative && !other.negative) {
+        smaller = true;
+    }else if (!this->negative && other.negative){
+        smaller = false;
+    }else if (sameLength && (!this->negative && !other.negative)) {
+        while (ithis && iother) {
+            if (ithis->info < iother->info) {
+                smaller = true;
+                same = false;
+                break;
+            }else if (ithis->info > iother->info) {
+                smaller = false;
+                break;
+            }else {
+                same = true;
+            }
+            ithis = ithis->next;
+            iother = iother->next;
+        }
+    }else if (this->negative && other.negative){
+        if (sameLength){
+            while (ithis && iother) {
+                if (ithis->info > iother->info) {
+                    smaller = true;
+                    same = false;
+                    break;
+                }else if (ithis->info < iother->info) {
+                    smaller = false;
+                    break;
+                }else {
+                    same = true;
+                }
+                ithis = ithis->next;
+                iother = iother->next;
+            }
+        }else{
+            smaller = (this->list.getLength() > other.list.getLength());
+        }
+    }
+    if (same) smaller = false;
+    return smaller;
+}
+
+bool LargeInt:: operator> (const LargeInt& other) 
+{
+    UDList<int>::iterator ithis = list.begin();
+    UDList<int>::iterator iother = other.list.begin();
+    bool bigger = (this->list.getLength() > other.list.getLength());
+    bool sameLength = (this->list.getLength() == other.list.getLength());
+    bool same = false;
+
+    if (this->negative && !other.negative) {
+        bigger = false;
+    }else if (!this->negative && other.negative){
+        bigger = true;
+    }else if (sameLength && (!this->negative && !other.negative)) {
+        while (ithis && iother) {
+            if (ithis->info > iother->info) {
+                bigger = true;
+                same = false;
+                break;
+            }else if (ithis->info < iother->info) {
+                bigger = false;
+                break;
+            }else {
+                same = true;
+            }
+            ithis = ithis->next;
+            iother = iother->next;
+        }
+    }else if (this->negative && other.negative){
+        if (sameLength){
+            while (ithis && iother) {
+                if (ithis->info < iother->info) {
+                    bigger = true;
+                    same = false;
+                    break;
+                }else if (ithis->info > iother->info) {
+                    bigger = false;
+                    break;
+                }else {
+                    same = true;
+                }
+                ithis = ithis->next;
+                iother = iother->next;
+            }
+        }else{
+            bigger = (this->list.getLength() < other.list.getLength());
+        }
+    }
+    if (same) bigger = false;
+    return bigger;
+}
+
+
 std::ostream& operator<< (std::ostream& out, const LargeInt& largeInt)
 {
     UDList<int>::iterator it = largeInt.list.begin();
