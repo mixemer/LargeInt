@@ -19,17 +19,30 @@ LargeInt storeIntTest();
 LargeInt negativeValueTest();
 // test LargeInt with addition of two negative values function prototypes
 LargeInt additionOfTwoNegativeValueTest();
+// test LargeInt with bigger smaller operators function prototypes
+void biggerSmallerTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
-    cout << storeStringTest() << endl;
-    cout << storeIntTest() << endl;
+    // cout << storeStringTest() << endl;
+    // cout << storeIntTest() << endl;
 
-    cout << negativeValueTest() << endl;
+    // cout << negativeValueTest() << endl;
 
-    cout << additionOfTwoNegativeValueTest() << endl;
+    // cout << additionOfTwoNegativeValueTest() << endl;
+
+    biggerSmallerTest(-100, -50);
     
     return 0;
+}
+
+void biggerSmallerTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    cout << l << " is bigger than " << l2 << ": " << (l > l2) << endl;
+    cout << l << " is smaller than " << l2 << ": " << (l < l2) << endl;
 }
 
 LargeInt additionOfTwoNegativeValueTest()
