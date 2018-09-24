@@ -142,47 +142,41 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
         temp = add(other);
         temp.negative = false;
     } else {
-        // call operator-
     }
     return temp;
 }
 
-UDList<int> LargeInt:: subs(const LargeInt& other)
+UDList<int> LargeInt:: subs(UDList<int>::iterator first, UDList<int>::iterator second)
 {
     UDList<int> temp;
-    UDList<int>::iterator ithis = list.end();
-    UDList<int>::iterator iother = other.list.end();
     UDList<int>::iterator p;
 
-    while (ithis || iother)
+    while (first || second)
     {
         int num = 0;
-        if (ithis && iother ) {
-            if (ithis->info < iother->info) {
-                p = ithis->prev;
+        if (first && second ) {
+            if (first->info < second->info) {
+                p = first->prev;
                 while (p->info == 0)
                     p = p->prev;
                 p->info -= 1;
                 p = p->next;
-                while (p != ithis) {
+                while (p != first) {
                     p->info += 10;
                     p->info -= 1;
                     p = p->next;
                 }
                 p->info += 10;
             }
-            num = ithis->info - iother->info;
+            num = first->info - second->info;
             temp.insertFront(num);
-            iother = iother->prev;
+            second = second->prev;
         }else {
-            if (ithis->info != 0) 
-                temp.insertFront(ithis->info);
+            if (first->info != 0) 
+                temp.insertFront(first->info);
         }
-        ithis = ithis->prev;
+        first = first->prev;
     }
-
-    
-
 
     return temp;
 }
@@ -190,21 +184,45 @@ UDList<int> LargeInt:: subs(const LargeInt& other)
 LargeInt LargeInt:: operator- (const LargeInt& other)
 {
     LargeInt temp;
-    if ( (this->negative && other.negative) ) {
-        // temp = subs(other);
-        // temp.negative = true;
-    } else if ( (!this->negative && !other.negative) ){
+    UDList<int>::iterator first = nullptr;
+    UDList<int>::iterator second = nullptr;
+    bool bothPositive = (!this->negative && !other.negative);
+    bool bothNegative = (this->negative && other.negative);
+    if (bothNegative || bothPositive){
         if ((*this) == other) {
             temp.list.insertFront(0);
-        }else if ((*this) > other){
-            temp = subs(other);
             temp.negative = false;
-        }else{
-            temp = subs(other);
-            temp.negative = true;
+        }else {
+            if ( bothNegative ) {
+                if ((*this) > other){
+                    first = other.list.end();
+                    second = list.end();
+                    temp.negative = false;
+                }else{
+                    first = list.end();
+                    second = other.list.end();
+                    temp.negative = true;
+                }
+            } else if ( bothPositive ){
+                if ((*this) > other){
+                    first = list.end();
+                    second = other.list.end();
+                    temp.negative = false;
+                }else{
+                    first = other.list.end();
+                    second = list.end();
+                    temp.negative = true;
+                }
+            }
+            temp = subs(first, second);
         }
-    } else {
-        // call operator+
+    }else {
+        if (this->negative) {
+            temp.negative = true;
+        }else{
+            temp.negative = false;
+        }
+        temp = add(other);
     }
     return temp;
 }
