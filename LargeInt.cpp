@@ -147,6 +147,68 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
     return temp;
 }
 
+UDList<int> LargeInt:: subs(const LargeInt& other)
+{
+    UDList<int> temp;
+    UDList<int>::iterator ithis = list.end();
+    UDList<int>::iterator iother = other.list.end();
+    UDList<int>::iterator p;
+
+    while (ithis || iother)
+    {
+        int num = 0;
+        if (ithis && iother ) {
+            if (ithis->info < iother->info) {
+                p = ithis->prev;
+                while (p->info == 0)
+                    p = p->prev;
+                p->info -= 1;
+                p = p->next;
+                while (p != ithis) {
+                    p->info += 10;
+                    p->info -= 1;
+                    p = p->next;
+                }
+                p->info += 10;
+            }
+            num = ithis->info - iother->info;
+            temp.insertFront(num);
+            iother = iother->prev;
+        }else {
+            if (ithis->info != 0) 
+                temp.insertFront(ithis->info);
+        }
+        ithis = ithis->prev;
+    }
+
+    
+
+
+    return temp;
+}
+
+LargeInt LargeInt:: operator- (const LargeInt& other)
+{
+    LargeInt temp;
+    if ( (this->negative && other.negative) ) {
+        // temp = subs(other);
+        // temp.negative = true;
+    } else if ( (!this->negative && !other.negative) ){
+        if ((*this) == other) {
+            temp.list.insertFront(0);
+        }else if ((*this) > other){
+            temp = subs(other);
+            temp.negative = false;
+        }else{
+            temp = subs(other);
+            temp.negative = true;
+        }
+    } else {
+        // call operator+
+    }
+    return temp;
+}
+
 bool LargeInt:: operator== (const LargeInt& other)
 {
     UDList<int>::iterator ithis = list.begin();
@@ -158,8 +220,10 @@ bool LargeInt:: operator== (const LargeInt& other)
     
     if (sameLength && (bothPositive || bothNegative)) {
         while (ithis && iother) {
-            if (ithis->info != iother->info)
+            if (ithis->info != iother->info){
                 same = false;
+                break;
+            }
             ithis = ithis->next;
             iother = iother->next;
         }

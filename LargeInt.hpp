@@ -41,6 +41,13 @@ private:
      * @return UDList<x> object that was added by this and other LargeInt
      */
     UDList<int> add(const LargeInt& other);
+
+    /**
+     * Substracts number digits of other LargeInt objects from this.
+     * @param other is a reference to LargeInt object
+     * @return LargeInt that was a result of substraction
+     */
+    UDList<int> subs(const LargeInt& other);
 public:
     LargeInt() {};
     
@@ -92,6 +99,13 @@ public:
      * @return LargeInt that was added by this and other LargeInt
      */
     LargeInt operator+ (const LargeInt& other);
+
+    /**
+     * Substracts number digits of other LargeInt objects from this.
+     * @param other is a reference to LargeInt object
+     * @return LargeInt that was a result of substraction
+     */
+    LargeInt operator- (const LargeInt& other);
     
     /**
      * Overloaded bool operator to check if this and other LargeInt objects contain the same data
