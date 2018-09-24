@@ -39,8 +39,9 @@ int main(int argc, const char * argv[]) {
 
     // equalTest(-10, 10);
 
-    minusTest(100,99);
-    
+    minusTest(-2, 100);
+    minusTest(-2,-100);
+
     return 0;
 }
 
