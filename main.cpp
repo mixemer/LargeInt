@@ -23,6 +23,8 @@ LargeInt additionOfTwoNegativeValueTest();
 void biggerSmallerTest(int num1, int num2);
 // test LargeInt with equal operator function prototypes
 void equalTest(int num1, int num2);
+// test LargeInt with minus operator function prototypes
+void minusTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -35,9 +37,22 @@ int main(int argc, const char * argv[]) {
 
     // biggerSmallerTest(-100, -50);
 
-    equalTest(-10, 10);
+    // equalTest(-10, 10);
+
+    minusTest(100,99);
     
     return 0;
+}
+
+void minusTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    LargeInt l3;
+    l3 = l - l2;
+
+    cout << l3 << endl;
 }
 
 void equalTest(int num1, int num2)
