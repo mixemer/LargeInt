@@ -151,18 +151,23 @@ bool LargeInt:: operator== (const LargeInt& other)
 {
     UDList<int>::iterator ithis = list.begin();
     UDList<int>::iterator iother = other.list.begin();
+    bool sameLength = (this->list.getLength() == other.list.getLength());
+    bool bothPositive = (!this->negative && !other.negative);
+    bool bothNegative = (this->negative && other.negative);
+    bool same = true;
     
-    if (list.getLength() != other.list.getLength())
-        return false;
-    
-    while (ithis && iother) {
-        if (ithis->info != iother->info)
-            return false;
-        ithis = ithis->next;
-        iother = iother->next;
+    if (sameLength && (bothPositive || bothNegative)) {
+        while (ithis && iother) {
+            if (ithis->info != iother->info)
+                same = false;
+            ithis = ithis->next;
+            iother = iother->next;
+        }
+    }else {
+        same = false;
     }
     
-    return true;
+    return same;
 }
 
 bool LargeInt:: operator< (const LargeInt& other)
