@@ -142,6 +142,7 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
         temp = add(other);
         temp.negative = false;
     } else {
+        // absolute values of nums
     }
     return temp;
 }
