@@ -25,6 +25,8 @@ void biggerSmallerTest(int num1, int num2);
 void equalTest(int num1, int num2);
 // test LargeInt with minus operator function prototypes
 void minusTest(int num1, int num2);
+// test LargeInt with minus operator function prototypes
+void differentSignAddTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -39,10 +41,23 @@ int main(int argc, const char * argv[]) {
 
     // equalTest(-10, 10);
 
-    minusTest(-2, 100);
-    minusTest(-2,-100);
+    // minusTest(-2, 100);
+    // minusTest(-2,-100);
+
+    differentSignAddTest(1, -10);
 
     return 0;
+}
+
+void differentSignAddTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    LargeInt l3;
+    l3 = l + l2;
+
+    cout << l3 << endl;
 }
 
 void minusTest(int num1, int num2)
