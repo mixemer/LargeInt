@@ -48,6 +48,13 @@ private:
      * @return LargeInt that was a result of substraction
      */
     UDList<int> subs(UDList<int>::iterator first, UDList<int>::iterator second);
+    
+    /**
+     * Absolute value of given LargeInt object, other
+     * @param other is a reference to LargeInt object
+     * @return LargeInt that was a result of absolute value of other
+     */
+    LargeInt abs(const LargeInt& other);
 public:
     LargeInt() {};
     

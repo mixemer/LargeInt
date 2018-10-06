@@ -97,6 +97,13 @@ void LargeInt:: fillTheList(int num)
     }
 }
 
+LargeInt LargeInt:: abs(const LargeInt& other) 
+{
+    LargeInt temp = other;
+    if (temp.negative) temp.negative = false;
+    return temp;
+}
+
 UDList<int> LargeInt:: add(const LargeInt& other)
 {
     UDList<int> temp;
@@ -142,7 +149,36 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
         temp = add(other);
         temp.negative = false;
     } else {
-        // absolute values of nums
+        LargeInt absThis = abs(*this);
+        LargeInt absOther = abs(other);
+        UDList<int>::iterator first = nullptr;
+        UDList<int>::iterator second = nullptr;
+
+        if (absThis == absOther) {
+            temp.list.insertFront(0);
+            temp.negative = false;
+        }else if (this->negative) {
+            if (absThis > absOther){
+                first = list.end();
+                second = other.list.end();
+                temp.negative = true;
+            }else{
+                first = other.list.end();
+                second = list.end();
+                temp.negative = false;
+            }
+        }else {
+            if (absThis > absOther){
+                first = list.end();
+                second = other.list.end();
+                temp.negative = false;
+            }else{
+                first = other.list.end();
+                second = list.end();
+                temp.negative = true;
+            }
+        }
+        temp = subs(first, second);
     }
     return temp;
 }
