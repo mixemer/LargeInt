@@ -40,7 +40,7 @@ private:
      * @param other is a reference to LargeInt object
      * @return UDList<x> object that was added by this and other LargeInt
      */
-    UDList<int> add(const LargeInt& other);
+    UDList<int> add(const LargeInt& thisObject, const LargeInt& other);
 
     /**
      * Substracts number digits of other LargeInt objects from this.
@@ -70,7 +70,7 @@ private:
     bool bothNegative(const LargeInt& other);
     bool bothPositive(const LargeInt& other);
 public:
-    LargeInt() {};
+    LargeInt() { negative = false; };
     
     /**
      * Overloaded constructor so it can get an string num so it can fill the nodes of the list with digits of the num
@@ -127,6 +127,13 @@ public:
      * @return LargeInt that was a result of substraction
      */
     LargeInt operator- (const LargeInt& other);
+
+    /**
+     * Multiplication number digits of other LargeInt objects from this.
+     * @param other is a reference to LargeInt object
+     * @return LargeInt that was a result of Multiplication
+     */
+    LargeInt operator* (const LargeInt& other);
     
     /**
      * Overloaded bool operator to check if this and other LargeInt objects contain the same data

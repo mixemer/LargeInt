@@ -104,11 +104,11 @@ LargeInt LargeInt:: abs(const LargeInt& other)
     return temp;
 }
 
-UDList<int> LargeInt:: add(const LargeInt& other)
+UDList<int> LargeInt:: add(const LargeInt& thisObject, const LargeInt& other)
 {
     UDList<int> temp;
     bool carry = false;
-    UDList<int>::iterator ithis = list.end();
+    UDList<int>::iterator ithis = thisObject.list.end();
     UDList<int>::iterator iother = other.list.end();
 
     while (ithis || iother)
@@ -143,10 +143,10 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
 {
     LargeInt temp;
     if ( bothNegative(other) ) {
-        temp = add(other);
+        temp = add((*this), other);
         temp.negative = true;
     } else if ( bothPositive(other) ){
-        temp = add(other);
+        temp = add((*this), other);
         temp.negative = false;
     } else {
         LargeInt absThis = abs(*this);
@@ -209,8 +209,11 @@ UDList<int> LargeInt:: subs(UDList<int>::iterator first, UDList<int>::iterator s
             temp.insertFront(num);
             second = second->prev;
         }else {
-            if (first->info != 0) 
+            if ( (first->info == 0) && !first->prev ) {
+                
+            }else {
                 temp.insertFront(first->info);
+            }
         }
         first = first->prev;
     }
@@ -257,8 +260,38 @@ LargeInt LargeInt:: operator- (const LargeInt& other)
         }else{
             temp.negative = false;
         }
-        temp = add(other);
+        temp = add((*this), other);
     }
+    return temp;
+}
+
+LargeInt LargeInt:: operator* (const LargeInt& other)
+{
+    LargeInt temp( abs(*this) );
+    LargeInt temp2 = abs(other); // this will be a counter to keep track of how many times to add
+    LargeInt subsObject(1);
+    UDList<int>::iterator ithis = list.begin();
+    UDList<int>::iterator itemp2 = temp2.list.begin();
+
+    std::cout << "ithis info: " << ithis->info << std::endl;
+    std::cout << "itemp info: " << itemp2->info << std::endl;
+
+    if (ithis && itemp2) {
+
+        if ( (ithis->info != 0) && (itemp2->info != 0) ) {
+            while ( !(temp2 == subsObject) ) {
+                std::cout << "temp2: " << temp2 << std::endl;
+                temp = add(temp, (*this)); // add function does not care about sign
+                temp2 = (temp2 - subsObject);
+            }
+        }
+
+        if ( !bothNegative(other) && !bothPositive(other) )
+            temp.negative = true;
+    }
+
+    
+
     return temp;
 }
 
