@@ -43,12 +43,12 @@ int main(int argc, const char * argv[]) {
 
     // equalTest(-10, 10);
 
-    // minusTest(-2, 100);
+     minusTest(2, 2);
     // minusTest(-2,-100);
 
     // differentSignAddTest(1, -10);
 
-    equalityTest(-10,10);
+     equalityTest(2,2);
 
     return 0;
 }

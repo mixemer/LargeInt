@@ -142,10 +142,10 @@ UDList<int> LargeInt:: add(const LargeInt& other)
 LargeInt LargeInt:: operator+ (const LargeInt& other)
 {
     LargeInt temp;
-    if ( (this->negative && other.negative) ) {
+    if ( bothNegative(other) ) {
         temp = add(other);
         temp.negative = true;
-    } else if ( (!this->negative && !other.negative) ){
+    } else if ( bothPositive(other) ){
         temp = add(other);
         temp.negative = false;
     } else {
@@ -223,14 +223,12 @@ LargeInt LargeInt:: operator- (const LargeInt& other)
     LargeInt temp;
     UDList<int>::iterator first = nullptr;
     UDList<int>::iterator second = nullptr;
-    bool bothPositive = (!this->negative && !other.negative);
-    bool bothNegative = (this->negative && other.negative);
-    if (bothNegative || bothPositive){
-        if ((*this) == other) {
+    if ( bothNegative(other) || bothPositive(other) ){
+        if ( ((*this) == other) ) {
             temp.list.insertFront(0);
             temp.negative = false;
         }else {
-            if ( bothNegative ) {
+            if ( bothNegative(other) ) {
                 if ((*this) > other){
                     first = other.list.end();
                     second = list.end();
@@ -240,7 +238,7 @@ LargeInt LargeInt:: operator- (const LargeInt& other)
                     second = other.list.end();
                     temp.negative = true;
                 }
-            } else if ( bothPositive ){
+            } else if ( bothPositive(other) ){
                 if ((*this) > other){
                     first = list.end();
                     second = other.list.end();
@@ -283,31 +281,27 @@ bool LargeInt:: equality(const LargeInt& other)
 
 bool LargeInt:: operator== (const LargeInt& other)
 {
-    bool sameLength = (this->list.getLength() == other.list.getLength());
-    bool bothPositive = (!this->negative && !other.negative);
-    bool bothNegative = (this->negative && other.negative);
     bool same = false;
     
-    if (sameLength && (bothPositive || bothNegative)) {
+    if ( thisSameLengthAsOther(other) && ( bothPositive(other) || bothNegative(other) )) {
         same = equality(other);
     }
     
     return same;
 }
-
+// -1 < 2 or 1 < -2 or 10 < 5 or -5 < -10
 bool LargeInt:: operator< (const LargeInt& other)
 {
     UDList<int>::iterator ithis = list.begin();
     UDList<int>::iterator iother = other.list.begin();
-    bool smaller = (this->list.getLength() < other.list.getLength());
-    bool sameLength = (this->list.getLength() == other.list.getLength());
+    bool smaller = thisSameLengthAsOther(other);
     bool same = false;
 
-    if (this->negative && !other.negative) {
+    if ( this->negative && !other.negative ) {
         smaller = true;
-    }else if (!this->negative && other.negative){
+    }else if ( !this->negative && other.negative ) {
         smaller = false;
-    }else if (sameLength && (!this->negative && !other.negative)) {
+    }else if ( thisSameLengthAsOther(other) && bothPositive(other) ) {
         while (ithis && iother) {
             if (ithis->info < iother->info) {
                 smaller = true;
@@ -322,8 +316,8 @@ bool LargeInt:: operator< (const LargeInt& other)
             ithis = ithis->next;
             iother = iother->next;
         }
-    }else if (this->negative && other.negative){
-        if (sameLength){
+    }else if ( this->negative && other.negative ){
+        if ( thisSameLengthAsOther(other) ){
             while (ithis && iother) {
                 if (ithis->info > iother->info) {
                     smaller = true;
@@ -350,15 +344,14 @@ bool LargeInt:: operator> (const LargeInt& other)
 {
     UDList<int>::iterator ithis = list.begin();
     UDList<int>::iterator iother = other.list.begin();
-    bool bigger = (this->list.getLength() > other.list.getLength());
-    bool sameLength = (this->list.getLength() == other.list.getLength());
+    bool bigger = thisBiggerLengthThanOther(other);
     bool same = false;
 
-    if (this->negative && !other.negative) {
+    if ( this->negative && !other.negative ) {
         bigger = false;
-    }else if (!this->negative && other.negative){
+    }else if ( !this->negative && other.negative ){
         bigger = true;
-    }else if (sameLength && (!this->negative && !other.negative)) {
+    }else if ( thisSameLengthAsOther(other) && bothPositive(other) ) {
         while (ithis && iother) {
             if (ithis->info > iother->info) {
                 bigger = true;
@@ -373,8 +366,8 @@ bool LargeInt:: operator> (const LargeInt& other)
             ithis = ithis->next;
             iother = iother->next;
         }
-    }else if (this->negative && other.negative){
-        if (sameLength){
+    }else if ( bothNegative(other) ){
+        if ( thisSameLengthAsOther(other) ){
             while (ithis && iother) {
                 if (ithis->info < iother->info) {
                     bigger = true;
@@ -431,7 +424,28 @@ void LargeInt:: print() const
     list.printFromFront();
 }
 
+// Helper functions
+bool LargeInt:: thisSameLengthAsOther(const LargeInt& other)
+{
+    return (this->list.getLength() == other.list.getLength());
+}
 
+bool LargeInt:: thisSmallerLengthThanOther(const LargeInt& other)
+{
+    return (this->list.getLength() < other.list.getLength());
+}
 
+bool LargeInt:: thisBiggerLengthThanOther(const LargeInt& other)
+{
+    return (this->list.getLength() > other.list.getLength());
+}
 
+bool LargeInt:: bothNegative(const LargeInt& other)
+{
+    return (this->negative && other.negative);
+}
 
+bool LargeInt:: bothPositive(const LargeInt& other)
+{
+    return (!this->negative && !other.negative);
+}

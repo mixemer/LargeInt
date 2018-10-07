@@ -56,7 +56,19 @@ private:
      */
     LargeInt abs(const LargeInt& other);
 
+    /**
+     * equality function to check if this and other LargeInt objects contain the same data
+     * @param other is a reference to LargeInt object
+     * @return bool that was a result of checking if this and other objects are the same
+     */
     bool equality(const LargeInt& other);
+
+    // helper functions
+    bool thisSameLengthAsOther(const LargeInt& other);
+    bool thisSmallerLengthThanOther(const LargeInt& other);
+    bool thisBiggerLengthThanOther(const LargeInt& other);
+    bool bothNegative(const LargeInt& other);
+    bool bothPositive(const LargeInt& other);
 public:
     LargeInt() {};
     
