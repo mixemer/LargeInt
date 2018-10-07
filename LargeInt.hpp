@@ -55,6 +55,8 @@ private:
      * @return LargeInt that was a result of absolute value of other
      */
     LargeInt abs(const LargeInt& other);
+
+    bool equality(const LargeInt& other);
 public:
     LargeInt() {};
     
