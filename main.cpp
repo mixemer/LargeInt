@@ -12,13 +12,13 @@
 using namespace std;
 
 // test LargeInt with string values function prototypes 
-LargeInt storeStringTest();
+void storeStringTest(string num);
 // test LargeInt with int values function prototypes
-LargeInt storeIntTest();
+void storeIntTest(int num);
 // test LargeInt with negative values function prototypes
-LargeInt negativeValueTest();
+void negativeValueTest(int num);
 // test LargeInt with addition of two negative values function prototypes
-LargeInt additionOfTwoNegativeValueTest();
+void additionOfTwoNegativeValueTest(int num1, int num2);
 // test LargeInt with bigger smaller operators function prototypes
 void biggerSmallerTest(int num1, int num2);
 // test LargeInt with equal operator function prototypes
@@ -32,33 +32,23 @@ void equalityTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
-    // cout << storeStringTest() << endl;
-    // cout << storeIntTest() << endl;
+    // storeStringTest();
+    // storeIntTest();
 
-    // cout << negativeValueTest() << endl;
+    // negativeValueTest();
 
-    // cout << additionOfTwoNegativeValueTest() << endl;
+    // additionOfTwoNegativeValueTest(-10, 20);
 
     // biggerSmallerTest(-100, -50);
 
     // equalTest(-10, 10);
 
-     minusTest(2, 2);
+    // minusTest(2, 2);
     // minusTest(-2,-100);
 
     // differentSignAddTest(1, -10);
 
-     equalityTest(2,2);
-
     return 0;
-}
-
-void equalityTest(int num1, int num2) 
-{
-    LargeInt l(num1);
-    LargeInt l2(num2);
-
-    cout << (l == l2) << endl;
 }
 
 void differentSignAddTest(int num1, int num2)
@@ -69,7 +59,7 @@ void differentSignAddTest(int num1, int num2)
     LargeInt l3;
     l3 = l + l2;
 
-    cout << l3 << endl;
+    cout << "add nums " << num1 << " and " << num2 << ": " << l3 << endl;
 }
 
 void minusTest(int num1, int num2)
@@ -80,7 +70,7 @@ void minusTest(int num1, int num2)
     LargeInt l3;
     l3 = l - l2;
 
-    cout << l3 << endl;
+    cout << "subs nums " << num1 << " and " << num2 << ": " << l3 << endl;
 }
 
 void equalTest(int num1, int num2)
@@ -101,35 +91,35 @@ void biggerSmallerTest(int num1, int num2)
     cout << l << " is smaller than " << l2 << ": " << (l < l2) << endl;
 }
 
-LargeInt additionOfTwoNegativeValueTest()
+void additionOfTwoNegativeValueTest(int num1, int num2)
 {
-    LargeInt l(-1000);
-    LargeInt l2(-1000);
+    LargeInt l(num1);
+    LargeInt l2(num2);
 
     LargeInt l3;
     l3 = l + l2;
 
-    return l3;
+    cout << "add nums " << num1 << " and " << num2 << ": " << l3 << endl;
 }
 
-LargeInt negativeValueTest()
+void negativeValueTest(int num)
 {
-    LargeInt l(-1000);
-    return l;
+    LargeInt l(num);
+    cout << "num: " << l << endl;
 }
 
-LargeInt storeIntTest()
+void storeIntTest(int num)
 {
-    LargeInt l2("100");
-    l2 = "200";
+    LargeInt l(num);
+    l = num;
 
-    return l2;
+    cout << "num: " << l << endl;
 }
 
-LargeInt storeStringTest()
+void storeStringTest(string num)
 {
-    LargeInt l(0);
-    l = 100;
+    LargeInt l(num);
+    l = num;
 
-    return l;
+    cout << "num: " << l << endl;
 }
