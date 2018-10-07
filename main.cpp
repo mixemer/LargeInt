@@ -6,6 +6,7 @@
  @version 1.1 Created by Mehmet Sahin on 9/8/18.
  */
 
+// @TODO: Check + and - operator with more examples to see if they behave right
 
 #include <iostream>
 #include "LargeInt.cpp" // cannot incldue hpp because of linking issue
@@ -27,8 +28,8 @@ void equalTest(int num1, int num2);
 void minusTest(int num1, int num2);
 // test LargeInt with minus operator function prototypes
 void differentSignAddTest(int num1, int num2);
-// test equality operator
-void equalityTest(int num1, int num2);
+// test LargeInt with multiply operator function prototypes
+void multiplyTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -43,12 +44,25 @@ int main(int argc, const char * argv[]) {
 
     // equalTest(-10, 10);
 
-    // minusTest(2, 2);
+    // minusTest(1100, 1); 
     // minusTest(-2,-100);
 
     // differentSignAddTest(1, -10);
 
+     multiplyTest(-9, 9);
+
     return 0;
+}
+
+void multiplyTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    LargeInt l3;
+    l3 = l * l2;
+
+    cout << "multipled nums " << num1 << " and " << num2 << ": " << l3 << endl;
 }
 
 void differentSignAddTest(int num1, int num2)
