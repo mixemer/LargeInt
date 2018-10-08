@@ -30,6 +30,8 @@ void minusTest(int num1, int num2);
 void differentSignAddTest(int num1, int num2);
 // test LargeInt with multiply operator function prototypes
 void multiplyTest(int num1, int num2);
+// test LargeInt with division operator function prototypes
+void divisionTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -38,20 +40,33 @@ int main(int argc, const char * argv[]) {
 
     // negativeValueTest();
 
-     additionOfTwoNegativeValueTest(100, -99);
+    // additionOfTwoNegativeValueTest(100, -99);
 
     // biggerSmallerTest(-100, -50);
 
     // equalTest(-10, 10);
 
-     minusTest(111, 110); 
+    // minusTest(111, 110); 
     // minusTest(-2,-100);
 
     // differentSignAddTest(1, -10);
 
     // multiplyTest(-9, 9);
 
+    divisionTest(-102, 2);
+
     return 0;
+}
+
+void divisionTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    LargeInt l3;
+    l3 = l / l2;
+
+    cout << num1 << " / " << num2 << ": " << l3 << endl;
 }
 
 void multiplyTest(int num1, int num2)
