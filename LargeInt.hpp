@@ -155,6 +155,12 @@ public:
     bool operator< (const LargeInt& other);
 
     /**
+     * Overloaded less-than-or-equal-to operator to check if this object is less or equal to other LargeInt object
+     * @param other is a reference to LargeInt object
+     */
+    bool operator<= (const LargeInt& other);
+
+    /**
      * Overloaded bool operator to check if this object is bigger than other object
      * @param other is a reference to LargeInt object
      */

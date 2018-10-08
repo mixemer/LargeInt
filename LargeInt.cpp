@@ -385,6 +385,11 @@ bool LargeInt:: operator< (const LargeInt& other)
     return smaller;
 }
 
+bool LargeInt:: operator<= (const LargeInt& other)
+{
+    return !( (*this) > other ); // if it is not bigger, it must be less or equal!
+}
+
 bool LargeInt:: operator> (const LargeInt& other) 
 {
     UDList<int>::iterator ithis = list.begin();
