@@ -83,9 +83,10 @@ void LargeInt:: fillTheList(const std::string& num)
 
 void LargeInt:: fillTheList(int num)
 {
-    if (num == 0)
+    if (num == 0){
         list.insertFront(num);
-    else if (num < 0){
+        negative = false;
+    }else if (num < 0){
         negative = true;
         num = num * -1;
     }else{
@@ -256,14 +257,10 @@ LargeInt LargeInt:: operator* (const LargeInt& other)
     UDList<int>::iterator ithis = list.begin();
     UDList<int>::iterator itemp2 = temp2.list.begin();
 
-    std::cout << "ithis info: " << ithis->info << std::endl;
-    std::cout << "itemp info: " << itemp2->info << std::endl;
-
     if (ithis && itemp2) {
 
         if ( (ithis->info != 0) && (itemp2->info != 0) ) {
             while ( !(temp2 == subsObject) ) {
-                std::cout << "temp2: " << temp2 << std::endl;
                 temp = add(temp, (*this)); // add function does not care about sign
                 temp2 = (temp2 - subsObject);
             }
@@ -273,9 +270,41 @@ LargeInt LargeInt:: operator* (const LargeInt& other)
             temp.negative = true;
     }
 
-    
-
     return temp;
+}
+
+LargeInt LargeInt:: operator/ (const LargeInt& other) 
+{
+    LargeInt temp( abs(*this) );
+    LargeInt temp2 = abs(other);
+    LargeInt result(0); // counter to check how many times it can be substracted
+    LargeInt addObject(1);
+
+    UDList<int>::iterator ithis = list.begin();
+    UDList<int>::iterator itemp2 = temp2.list.begin();
+
+    if (ithis && itemp2) {
+        
+        if ( itemp2->info == 0 ) {
+            std::cout << "Cannot be divided!!" << std::endl;
+            return NULL;
+        }
+
+        if ( (ithis->info != 0) ) {
+
+            while ( !(temp < temp2) ) {
+                result = (result + addObject);
+                temp = (temp - temp2);
+            }
+            
+        }
+
+        if ( !bothNegative(other) && !bothPositive(other) )
+            result.negative = true;
+    }
+
+    std::cout << "reminder: " << temp << std::endl;
+    return result;
 }
 
 bool LargeInt:: equality(const LargeInt& other) 
