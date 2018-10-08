@@ -159,6 +159,12 @@ public:
      * @param other is a reference to LargeInt object
      */
     bool operator> (const LargeInt& other);
+
+    /**
+     * Overloaded greater-than-or-equal-to operator to check if this object is bigger or equal to other LargeInt object
+     * @param other is a reference to LargeInt object
+     */
+    bool operator>= (const LargeInt& other);
     
     /**
      * Overloaded output operator to output data of this object to files

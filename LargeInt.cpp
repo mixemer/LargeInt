@@ -435,6 +435,11 @@ bool LargeInt:: operator> (const LargeInt& other)
     return bigger;
 }
 
+bool LargeInt:: operator>= (const LargeInt& other)
+{
+    return !( (*this) < other );
+}
+
 
 std::ostream& operator<< (std::ostream& out, const LargeInt& largeInt)
 {
