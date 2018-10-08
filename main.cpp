@@ -34,6 +34,8 @@ void multiplyTest(int num1, int num2);
 void divisionTest(int num1, int num2);
 // test LargeInt with greater-than-or-equal-to operator function
 void greaterThanOrEqualToTest(int num1, int num2);
+// test LargeInt with less-than-or-equal-to operator function
+void lessThanOrEqualToTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -59,7 +61,17 @@ int main(int argc, const char * argv[]) {
 
     // greaterThanOrEqualToTest(-2,-10);
 
+    // lessThanOrEqualToTest(-10, -2);
+
     return 0;
+}
+
+void lessThanOrEqualToTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    cout << l << " >= " << l2 << ": " << (l <= l2) << endl;
 }
 
 void greaterThanOrEqualToTest(int num1, int num2)
