@@ -47,7 +47,7 @@ private:
      * @param other is a reference to LargeInt object
      * @return LargeInt that was a result of substraction
      */
-    UDList<int> subs(UDList<int>::iterator first, UDList<int>::iterator second);
+    UDList<int> subs(const LargeInt& thisObject, const LargeInt& other); // UDList<int>::iterator first, UDList<int>::iterator second
     
     /**
      * Absolute value of given LargeInt object, other

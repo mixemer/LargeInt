@@ -38,18 +38,18 @@ int main(int argc, const char * argv[]) {
 
     // negativeValueTest();
 
-    // additionOfTwoNegativeValueTest(-10, 20);
+     additionOfTwoNegativeValueTest(100, -99);
 
     // biggerSmallerTest(-100, -50);
 
     // equalTest(-10, 10);
 
-    // minusTest(1100, 1); 
+     minusTest(111, 110); 
     // minusTest(-2,-100);
 
     // differentSignAddTest(1, -10);
 
-     multiplyTest(-9, 9);
+    // multiplyTest(-9, 9);
 
     return 0;
 }
@@ -80,11 +80,15 @@ void minusTest(int num1, int num2)
 {
     LargeInt l(num1);
     LargeInt l2(num2);
+    cout << "l: " << l << endl;
+    cout << "l2: " << l2 << endl;
 
     LargeInt l3;
     l3 = l - l2;
 
     cout << "subs nums " << num1 << " and " << num2 << ": " << l3 << endl;
+    cout << "l: " << l << endl;
+    cout << "l2: " << l2 << endl;
 }
 
 void equalTest(int num1, int num2)
@@ -110,10 +114,15 @@ void additionOfTwoNegativeValueTest(int num1, int num2)
     LargeInt l(num1);
     LargeInt l2(num2);
 
+    cout << "l: " << l << endl;
+    cout << "l2: " << l2 << endl;
+
     LargeInt l3;
     l3 = l + l2;
 
     cout << "add nums " << num1 << " and " << num2 << ": " << l3 << endl;
+    cout << "l: " << l << endl;
+    cout << "l2: " << l2 << endl;
 }
 
 void negativeValueTest(int num)

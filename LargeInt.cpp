@@ -61,15 +61,15 @@ void LargeInt:: operator= (int num)
 // could override what is inside
 void LargeInt:: fillTheList(const std::string& num)
 {
-    int i = 0;
-    if (num[0] == '-'){
-        negative = true;
-        i = 1;
-    }else {
-        negative = false;
-    }
     long size = num.size();
+    int i = 0;
     if (size > 0){
+        if (num[0] == '-'){
+            negative = true;
+            i = 1;
+        }else {
+            negative = false;
+        }
         while (i < size) {
             if (!isdigit(num[i])){
                 std::cout << string("Bad data type");
@@ -151,42 +151,35 @@ LargeInt LargeInt:: operator+ (const LargeInt& other)
     } else {
         LargeInt absThis = abs(*this);
         LargeInt absOther = abs(other);
-        UDList<int>::iterator first = nullptr;
-        UDList<int>::iterator second = nullptr;
+        bool thisFirst = true; // assume this should be first
 
         if (absThis == absOther) {
             temp.list.insertFront(0);
             temp.negative = false;
         }else if (this->negative) {
             if (absThis > absOther){
-                first = list.end();
-                second = other.list.end();
                 temp.negative = true;
             }else{
-                first = other.list.end();
-                second = list.end();
-                temp.negative = false;
+                thisFirst = false;
             }
         }else {
-            if (absThis > absOther){
-                first = list.end();
-                second = other.list.end();
-                temp.negative = false;
-            }else{
-                first = other.list.end();
-                second = list.end();
+            if (absThis < absOther){
+                thisFirst = false;
                 temp.negative = true;
             }
         }
-        temp = subs(first, second);
+        temp = (thisFirst ? subs((*this), other) : subs(other, (*this)));
     }
     return temp;
 }
 
-UDList<int> LargeInt:: subs(UDList<int>::iterator first, UDList<int>::iterator second)
+UDList<int> LargeInt:: subs(const LargeInt& thisObject, const LargeInt& other)
 {
+    LargeInt copyThis(thisObject); // create a copy to make sure to NOT modify
     UDList<int> temp;
     UDList<int>::iterator p;
+    UDList<int>::iterator first = copyThis.list.end();
+    UDList<int>::iterator second = other.list.end();
 
     while (first || second)
     {
@@ -224,8 +217,7 @@ UDList<int> LargeInt:: subs(UDList<int>::iterator first, UDList<int>::iterator s
 LargeInt LargeInt:: operator- (const LargeInt& other)
 {
     LargeInt temp;
-    UDList<int>::iterator first = nullptr;
-    UDList<int>::iterator second = nullptr;
+    bool thisFirst = true; // assume this should be first
     if ( bothNegative(other) || bothPositive(other) ){
         if ( ((*this) == other) ) {
             temp.list.insertFront(0);
@@ -233,26 +225,17 @@ LargeInt LargeInt:: operator- (const LargeInt& other)
         }else {
             if ( bothNegative(other) ) {
                 if ((*this) > other){
-                    first = other.list.end();
-                    second = list.end();
-                    temp.negative = false;
+                    thisFirst = false;
                 }else{
-                    first = list.end();
-                    second = other.list.end();
                     temp.negative = true;
                 }
             } else if ( bothPositive(other) ){
-                if ((*this) > other){
-                    first = list.end();
-                    second = other.list.end();
-                    temp.negative = false;
-                }else{
-                    first = other.list.end();
-                    second = list.end();
+                if ((*this) < other){
+                    thisFirst = false;
                     temp.negative = true;
                 }
             }
-            temp = subs(first, second);
+            temp = (thisFirst ? subs((*this), other) : subs(other, (*this)));
         }
     }else {
         if (this->negative) {
