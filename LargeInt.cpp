@@ -334,6 +334,12 @@ bool LargeInt:: operator== (const LargeInt& other)
     
     return same;
 }
+
+bool LargeInt:: operator!= (const LargeInt& other)
+{
+    return !( (*this) == other ); // if it is not equal, it must be inequal!
+}
+
 // -1 < 2 or 1 < -2 or 10 < 5 or -5 < -10
 bool LargeInt:: operator< (const LargeInt& other)
 {
