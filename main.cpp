@@ -32,6 +32,8 @@ void differentSignAddTest(int num1, int num2);
 void multiplyTest(int num1, int num2);
 // test LargeInt with division operator function prototypes
 void divisionTest(int num1, int num2);
+// test LargeInt with greater-than-or-equal-to operator function
+void greaterThanOrEqualToTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -53,9 +55,19 @@ int main(int argc, const char * argv[]) {
 
     // multiplyTest(-9, 9);
 
-    divisionTest(-102, 2);
+    // divisionTest(-102, 2);
+
+    // greaterThanOrEqualToTest(-2,-10);
 
     return 0;
+}
+
+void greaterThanOrEqualToTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    cout << l << " >= " << l2 << ": " << (l >= l2) << endl;
 }
 
 void divisionTest(int num1, int num2)
