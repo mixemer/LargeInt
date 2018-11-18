@@ -38,6 +38,7 @@ void greaterThanOrEqualToTest(int num1, int num2);
 void lessThanOrEqualToTest(int num1, int num2);
 // test LargeInt with inequal operator function
 void inEqualTest(int num1, int num2);
+void modTest(int num1, int num2);
 
 int main(int argc, const char * argv[]) {
     
@@ -67,7 +68,20 @@ int main(int argc, const char * argv[]) {
 
     // inEqualTest(1, 1);
 
+    // modTest(-10,10);
+
     return 0;
+}
+
+void modTest(int num1, int num2)
+{
+    LargeInt l(num1);
+    LargeInt l2(num2);
+
+    LargeInt l3;
+    l3 = l % l2;
+
+    cout << num1 << " % " << num2 << ": " << l3 << endl;
 }
 
 void inEqualTest(int num1, int num2)
