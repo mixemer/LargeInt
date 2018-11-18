@@ -141,6 +141,13 @@ public:
      * @return LargeInt that was a result of Division
      */
     LargeInt operator/ (const LargeInt& other);
+
+    /**
+     * Division number digits of other LargeInt objects from this.
+     * @param other is a reference to LargeInt object
+     * @return LargeInt that was a result of Division
+     */
+    LargeInt operator% (const LargeInt& other);
     
     /**
      * Overloaded bool operator to check if this and other LargeInt objects contain the same data

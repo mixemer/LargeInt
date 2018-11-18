@@ -303,8 +303,43 @@ LargeInt LargeInt:: operator/ (const LargeInt& other)
             result.negative = true;
     }
 
-    std::cout << "reminder: " << temp << std::endl;
     return result;
+}
+
+LargeInt LargeInt:: operator% (const LargeInt& other)
+{        
+    LargeInt temp( abs(*this) );
+    LargeInt temp2 = abs(other);
+    LargeInt result(0); // counter to check how many times it can be substracted
+    LargeInt addObject(1);
+
+    if (temp == temp2)
+        return result;
+
+    UDList<int>::iterator ithis = list.begin();
+    UDList<int>::iterator itemp2 = temp2.list.begin();
+
+    if (ithis && itemp2) {
+        
+        if ( itemp2->info == 0 ) {
+            std::cout << "Cannot be divided!!" << std::endl;
+            return NULL;
+        }
+
+        if ( (ithis->info != 0) ) {
+
+            while ( !(temp < temp2) ) {
+                result = (result + addObject);
+                temp = (temp - temp2);
+            }
+            
+        }
+
+        if ( !bothNegative(other) && !bothPositive(other) )
+            result.negative = true;
+    }
+
+    return temp;
 }
 
 bool LargeInt:: equality(const LargeInt& other) 
