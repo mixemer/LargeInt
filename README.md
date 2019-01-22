@@ -2,7 +2,7 @@
 ### An honor project for CSC331 - data structure class.
 
 
-![](Images/Presentation/Slide1.jpg)
+![](Images/Presentation/Slide1.jpeg)
 ![](Images/Presentation/Slide2.jpg)
 ![](Images/Presentation/Slide3.jpg)
 ![](Images/Presentation/Slide4.jpg)
